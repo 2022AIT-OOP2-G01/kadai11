@@ -5,7 +5,9 @@ class Image_Processing():
         self.image = image
     def img2gray(self):
         #画像のグレイスケール化
-        pass
+        gs = self.image.copy()
+        gs = cv2.cvtColor(gs, cv2.COLOR_BGR2GRAY)
+        return gs
     def face_detection(self):
         #顔検出
         pass
