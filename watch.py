@@ -11,6 +11,7 @@ class Image_Processing():
     def __init__(self, image):
         self.image = image
     def face_mosaic(self):
+        #モザイク処理
         g_img = self.img2gray()
         faces = face_cascade.detectMultiScale(g_img)
         result = self.image.copy()
