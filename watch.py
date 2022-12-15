@@ -6,7 +6,7 @@ from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 
 
-face_cascade_path = '/data_cascade/haarcascade_frontalface_default.xml'
+face_cascade_path = './data_cascade/haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(face_cascade_path)
 
 class Image_Processing():
