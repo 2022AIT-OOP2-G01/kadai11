@@ -1,8 +1,10 @@
 import cv2
+
 import time
 import os
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
+
 
 face_cascade_path = '/data_cascade/haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(face_cascade_path)
@@ -23,11 +25,31 @@ class Image_Processing():
         gs = self.image.copy()
         gs = cv2.cvtColor(gs, cv2.COLOR_BGR2GRAY)
         return gs
+        
     def face_detection(self):
-        #顔検出
-        pass
+        
+        #self.imageをreturnで返す
+        # self = cv2.imread('human.jpeg')
+        gray_scale = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+        #カスケード分類機の特徴量を取得
+
+        facerect = face_cascade.detectMultiScale(gray_scale, minSize=(50,50))
+        color=(0 ,0, 255)
+        # 検出した場合
+        if len(facerect) > 0:
+
+            #検出した顔を囲む矩形の作成
+            for rect in facerect:
+                cv2.rectangle(self.image, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
+
+        #cv2.imwrite('./img/test.jpeg', self.image)
+
+
+        return self.image
+
     def contour_detection(self):
         #輪郭抽出
+
         edges = cv2.Canny(self.image, 100, 400)
         return edges
     def binary_img(self):
