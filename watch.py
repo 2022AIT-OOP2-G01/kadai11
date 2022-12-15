@@ -14,3 +14,9 @@ class Image_Processing():
     def contour_detection(self):
         #輪郭抽出
         pass
+    def binary_img(self):
+        #2値化
+        gray_img = self.img2gray()
+        threshold = 100
+        ret, binary_img = cv2.threshold(gray_img, threshold, 255, cv2.THRESH_BINARY)
+        return binary_img
