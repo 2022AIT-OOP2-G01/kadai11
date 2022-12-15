@@ -11,4 +11,5 @@ class Image_Processing():
         pass
     def contour_detection(self):
         #輪郭抽出
-        pass
+        edges = cv2.Canny(self.image, 100, 400)
+        return edges
