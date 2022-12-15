@@ -9,13 +9,16 @@ class Image_Processing():
         self.image = image
     def img2gray(self):
         #画像のグレイスケール化
-        pass
+        gs = self.image.copy()
+        gs = cv2.cvtColor(gs, cv2.COLOR_BGR2GRAY)
+        return gs
     def face_detection(self):
         #顔検出
         pass
     def contour_detection(self):
         #輪郭抽出
-        pass
+        edges = cv2.Canny(self.image, 100, 400)
+        return edges
 
 class CustomLoggingEventHandler(LoggingEventHandler):
     def on_created(self, event):
