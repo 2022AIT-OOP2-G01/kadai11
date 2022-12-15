@@ -28,9 +28,9 @@ class CustomLoggingEventHandler(LoggingEventHandler):
             processing = Image_Processing(img)
 
             file_name = os.path.basename(event.src_path)
-            cv2.imwrite('./after_processing/gray/' + file_name, processing.img2gray())
-            cv2.imwrite('./after_processing/face/' + file_name, processing.face_detection())
-            cv2.imwrite('./after_processing/contour/' + file_name, processing.contour_detection)
+            cv2.imwrite('./after/gs/' + file_name, processing.img2gray())
+            #cv2.imwrite('./after/face/' + file_name, processing.face_detection())
+            cv2.imwrite('./after/contour/' + file_name, processing.contour_detection())
         
 
 if __name__ == "__main__":
