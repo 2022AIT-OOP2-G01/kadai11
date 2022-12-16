@@ -1,10 +1,8 @@
 import cv2
-
 import time
 import os
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
-
 
 face_cascade_path = './data_cascade/haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(face_cascade_path)
@@ -12,14 +10,17 @@ face_cascade = cv2.CascadeClassifier(face_cascade_path)
 class Image_Processing():
     def __init__(self, image):
         self.image = image
+
     def face_mosaic(self):
         #モザイク処理
         g_img = self.img2gray()
         faces = face_cascade.detectMultiScale(g_img)
         result = self.image.copy()
         for x, y, w, h in faces:
-            result[y: y + h, x: x + w] = [0, 128, 255]
+            small = cv2.resize(result[y: y + h, x: x + w], None, fx=0.05, fy=0.05, interpolation=cv2.INTER_NEAREST)
+            result[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
         return result
+
     def img2gray(self):
         #画像のグレイスケール化
         gs = self.image.copy()
@@ -43,13 +44,10 @@ class Image_Processing():
                 cv2.rectangle(self.image, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
 
         #cv2.imwrite('./img/test.jpeg', self.image)
-
-
         return self.image
 
     def contour_detection(self):
         #輪郭抽出
-
         edges = cv2.Canny(self.image, 100, 400)
         return edges
     def binary_img(self):
@@ -72,6 +70,7 @@ class CustomLoggingEventHandler(LoggingEventHandler):
             cv2.imwrite('./after/face/' + file_name, processing.face_detection())
             cv2.imwrite('./after/contour/' + file_name, processing.contour_detection())
             cv2.imwrite('./after/mosaic/' + file_name, processing.face_mosaic())
+            cv2.imwrite('./after/binary/' + file_name, processing.binary_img())
         
 
 if __name__ == "__main__":
