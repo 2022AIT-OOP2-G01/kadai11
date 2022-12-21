@@ -27,6 +27,11 @@
     </nav>
     <div class="container mt-5">
         <h1>{{ page_title }}</h1>
+        <form method=post enctype=multipart/form-data>
+          <input type=file name=file>
+          <input type=submit value='アップロード'>
+        </form>
+        <h2>{{message}}</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for file in target_files %}
             <div class="col">
