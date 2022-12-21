@@ -10,6 +10,7 @@ class ImageProcessing():
 
     def face_detection(self):
         
+        face_image = self.image.copy()
         cascade_path= "./data_cascade/haarcascade_frontalface_default.xml"
         #self.imageをreturnで返す
         # self = cv2.imread('human.jpeg')
@@ -24,17 +25,15 @@ class ImageProcessing():
 
             #検出した顔を囲む矩形の作成
             for rect in facerect:
-                cv2.rectangle(self.image, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
+                cv2.rectangle(face_image, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
 
-        #cv2.imwrite('./img/test.jpeg', self.image)
+        cv2.imwrite('./img/test.jpeg', face_image)
+        return face_image
+        
 
+if __name__ == "__main__":
+    app = ImageProcessing(cv2.imread('./img/human.jpeg'))
+    app.face_detection()
 
-        return self.image
-        pass
-
-
-    def contour_detection(self):
-        #輪郭抽出
-        pass
     
 
