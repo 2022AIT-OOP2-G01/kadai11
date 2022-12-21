@@ -29,6 +29,8 @@ class Image_Processing():
         
     def face_detection(self):
         
+        face_image = self.image.copy()
+        
         #self.imageをreturnで返す
         # self = cv2.imread('human.jpeg')
         gray_scale = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
@@ -41,10 +43,10 @@ class Image_Processing():
 
             #検出した顔を囲む矩形の作成
             for rect in facerect:
-                cv2.rectangle(self.image, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
+                cv2.rectangle(face_image, tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), color, thickness=2)
 
-        #cv2.imwrite('./img/test.jpeg', self.image)
-        return self.image
+        # cv2.imwrite('./img/test.jpeg', face_image)
+        return face_image
 
     def contour_detection(self):
         #輪郭抽出
