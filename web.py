@@ -29,13 +29,13 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('index.html', is_uploaded = True)
-    return render_template('index.html', is_uploaded = False)
+            return render_template('index.html', message = '画像のアップロードが完了しました')
+    return render_template('index.html', message = '画像のアップロードができていません')
 
 # Topページ
 @app.route('/')
 def index():
-    return render_template("index.html", message=None)
+    return render_template("index.html", message='')
 
 
 # アップロードファイル一覧

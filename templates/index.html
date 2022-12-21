@@ -31,11 +31,7 @@
           <input type=file name=file>
           <input type=submit value='アップロード'>
         </form>
-        {% if is_uploaded %}
-        <h2>画像のアップロードが完了しました</h2>
-        {% else %}
-        <h2>画像のアップロードができていません</h2>
-        {% endif %}
+        <h2>{{message}}</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for file in target_files %}
             <div class="col">
